@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FreshVibe — Мои личные цифры</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:#faf8f5;padding:24px 16px;}
+.page{max-width:680px;margin:0 auto;background:#fff;border-radius:24px;padding:40px 36px;box-shadow:0 8px 40px rgba(0,0,0,.09);}
+.logo{font-size:12px;font-weight:800;color:#4fa85c;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;}
+h1{font-size:1.75rem;font-weight:900;color:#1e1e1e;margin-bottom:6px;}
+.sub{font-size:15px;color:#777;margin-bottom:24px;font-style:italic;}
+.explainer{background:#faf8f5;border-left:4px solid #7EC88A;border-radius:12px;padding:16px 18px;margin-bottom:28px;font-size:14px;color:#555;line-height:1.7;}
+.section{margin-bottom:28px;}
+.section-title{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:#4fa85c;margin-bottom:14px;}
+.input-row{display:flex;gap:14px;align-items:center;margin-bottom:12px;background:#faf8f5;border-radius:12px;padding:12px 16px;}
+.input-icon{font-size:20px;flex-shrink:0;}
+.input-label{font-size:14px;font-weight:700;color:#1e1e1e;flex:1;}
+.input-field{width:90px;border:2px solid #e4ded8;border-radius:8px;padding:7px 10px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:#1e1e1e;text-align:center;background:#fff;outline:none;}
+.input-field:focus{border-color:#7EC88A;}
+.input-unit{font-size:13px;color:#999;font-weight:600;width:26px;}
+.activity-row{display:flex;flex-direction:column;gap:8px;margin-top:4px;}
+.activity-opt{display:flex;align-items:flex-start;gap:10px;cursor:pointer;}
+.activity-opt input[type=radio]{accent-color:#4fa85c;margin-top:3px;cursor:pointer;}
+.activity-opt .a-text{font-size:14px;color:#333;font-weight:600;line-height:1.4;}
+.activity-opt .a-hint{font-size:12px;color:#999;}
+.calc-block{background:#1e1e1e;border-radius:16px;padding:24px;margin-bottom:28px;}
+.calc-block h3{color:#fff;font-size:15px;font-weight:900;margin-bottom:16px;}
+.formula{background:rgba(255,255,255,.07);border-radius:10px;padding:12px 14px;margin-bottom:12px;}
+.formula .f-label{font-size:11px;color:rgba(255,255,255,.5);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.formula .f-text{font-size:13px;color:rgba(255,255,255,.85);line-height:1.6;}
+.formula .f-text strong{color:#7EC88A;}
+.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;}
+.result-card{background:rgba(255,255,255,.09);border-radius:12px;padding:14px 16px;}
+.r-icon{font-size:22px;margin-bottom:6px;}
+.r-label{font-size:11px;color:rgba(255,255,255,.5);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.r-value{font-size:20px;font-weight:900;color:#fff;min-height:28px;}
+.r-unit{font-size:12px;color:rgba(255,255,255,.5);}
+.calc-btn{display:block;width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,#7EC88A,#4fa85c);color:#fff;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;border:none;border-radius:12px;cursor:pointer;transition:opacity .2s;}
+.calc-btn:hover{opacity:.88;}
+.note-block{background:#fdf0ee;border-radius:14px;padding:16px 18px;font-size:14px;color:#555;line-height:1.7;margin-bottom:24px;}
+.note-block strong{color:#F4856A;}
+.footer{background:linear-gradient(135deg,#1e1e1e,#2d2d2d);border-radius:16px;padding:20px 24px;color:#fff;}
+.footer p{font-size:15px;font-weight:700;line-height:1.6;margin-bottom:8px;}
+.footer .sig{font-size:13px;color:rgba(255,255,255,.5);}
+@media(max-width:480px){.result-grid{grid-template-columns:1fr 1fr;}.input-row{flex-wrap:wrap;}}
+@media print{body{background:#fff;padding:0;}.page{box-shadow:none;border-radius:0;padding:20px;}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="logo">🌿 FreshVibe · Бонус 6</div>
+  <h1>Мои личные цифры</h1>
+  <p class="sub">Твой личный ориентир в еде — без диет, без запретов</p>
+
+  <div class="explainer">
+    КБЖУ — это калории, белки, жиры и углеводы. Представь, что еда — это топливо, а твоё тело — машина: калории показывают, <strong>сколько топлива тебе нужно на день</strong>, а белки, жиры и углеводы — из чего оно состоит. Когда знаешь свои цифры, не нужно гадать «можно мне это или нельзя» — ты просто видишь картину целиком.
+  </div>
+
+  <div class="section">
+    <div class="section-title">Твои данные</div>
+    <div class="input-row">
+      <div class="input-icon">⚖️</div>
+      <div class="input-label">Мой вес</div>
+      <input type="number" class="input-field" id="weight" placeholder="60">
+      <div class="input-unit">кг</div>
+    </div>
+    <div class="input-row">
+      <div class="input-icon">📏</div>
+      <div class="input-label">Мой рост</div>
+      <input type="number" class="input-field" id="height" placeholder="165">
+      <div class="input-unit">см</div>
+    </div>
+    <div class="input-row">
+      <div class="input-icon">🎂</div>
+      <div class="input-label">Мой возраст</div>
+      <input type="number" class="input-field" id="age" placeholder="32">
+      <div class="input-unit">лет</div>
+    </div>
+    <div class="input-row" style="flex-direction:column;align-items:flex-start;gap:10px;">
+      <div style="display:flex;gap:10px;align-items:center;"><div class="input-icon">🚶</div><div class="input-label">Моя активность</div></div>
+      <div class="activity-row">
+        <label class="activity-opt">
+          <input type="radio" name="activity" value="1.2">
+          <div><div class="a-text">Сижу весь день</div><div class="a-hint">работа за компьютером, машина, диван</div></div>
+        </label>
+        <label class="activity-opt">
+          <input type="radio" name="activity" value="1.4" checked>
+          <div><div class="a-text">Иногда двигаюсь</div><div class="a-hint">прогулки, уборка, лестницы вместо лифта</div></div>
+        </label>
+        <label class="activity-opt">
+          <input type="radio" name="activity" value="1.6">
+          <div><div class="a-text">Активная</div><div class="a-hint">тренировки 3+ раза в неделю или работа на ногах</div></div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-block">
+    <h3>Считаем вместе</h3>
+    <div class="formula">
+      <div class="f-label">🔥 Калории (формула Миффлина)</div>
+      <div class="f-text"><strong>(10 × вес) + (6 × рост) − (5 × возраст) − 161</strong> × коэффициент активности<br>Для снижения веса — отними 300 ккал. Не больше!</div>
+    </div>
+    <div class="formula">
+      <div class="f-label">🥚 Белок / 🥑 Жиры / 🍚 Углеводы</div>
+      <div class="f-text">Белок: <strong>вес × 1,5</strong> г · Жиры: <strong>калории × 0,3 ÷ 9</strong> г · Углеводы: остаток</div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Посчитать мои цифры →</button>
+    <div class="result-grid">
+      <div class="result-card"><div class="r-icon">🔥</div><div class="r-label">Норма калорий</div><div class="r-value" id="res-kcal">—</div><div class="r-unit">ккал в день</div></div>
+      <div class="result-card"><div class="r-icon">🥚</div><div class="r-label">Белок</div><div class="r-value" id="res-protein">—</div><div class="r-unit">г в день</div></div>
+      <div class="result-card"><div class="r-icon">🥑</div><div class="r-label">Жиры</div><div class="r-value" id="res-fat">—</div><div class="r-unit">г в день</div></div>
+      <div class="result-card"><div class="r-icon">🍚</div><div class="r-label">Углеводы</div><div class="r-value" id="res-carbs">—</div><div class="r-unit">г в день</div></div>
+    </div>
+  </div>
+
+  <div class="note-block">
+    <strong>Важно:</strong> эти цифры — ориентир, а не тюрьма. Попала примерно — уже отлично, плюс-минус 10% ничего не решают. Ты не обязана сходиться с калькулятором копейка в копейку — ты обязана только заботиться о себе.
+  </div>
+
+  <div class="footer">
+    <p>Теперь у тебя есть свои цифры. Не чужая диета из интернета — а твоя личная точка опоры. 💚</p>
+    <div class="sig">С теплом, Ирина Андреева · @andreeva_irina_hlf</div>
+  </div>
+</div>
+<script>
+function calculate(){
+  const w=parseFloat(document.getElementById('weight').value)||0;
+  const h=parseFloat(document.getElementById('height').value)||0;
+  const a=parseFloat(document.getElementById('age').value)||0;
+  const act=parseFloat(document.querySelector('input[name=activity]:checked').value)||1.4;
+  if(!w||!h||!a){alert('Заполни вес, рост и возраст 😊');return;}
+  const bmr=(10*w)+(6*h)-(5*a)-161;
+  const kcal=Math.round(bmr*act);
+  const protein=Math.round(w*1.5);
+  const fat=Math.round(kcal*0.3/9);
+  const carbs=Math.round((kcal-protein*4-fat*9)/4);
+  document.getElementById('res-kcal').textContent=kcal;
+  document.getElementById('res-protein').textContent=protein+' г';
+  document.getElementById('res-fat').textContent=fat+' г';
+  document.getElementById('res-carbs').textContent=carbs+' г';
+}
+</script>
+</body>
+</html>
