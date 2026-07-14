@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Частые вопросы — FreshVibe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--g:#7EC88A;--gd:#4fa85c;--gl:#e8f7eb;--c:#F4856A;--cl:#fff0ec;--beige:#faf8f5;--text:#1e1e1e;--muted:#777;--border:#e4ded8;--shadow:0 4px 24px rgba(0,0,0,.08);--r:16px;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;color:var(--text);background:var(--beige);font-size:17px;line-height:1.7;}
+a{color:inherit;text-decoration:none;}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-weight:900;font-size:21px;color:var(--gd);}.nav-logo span{color:var(--c);}
+.nav-back{font-size:14px;color:var(--muted);font-weight:700;}.nav-back:hover{color:var(--gd);}
+.hero{background:linear-gradient(145deg,#f0faf2,#fff);padding:56px 20px 40px;text-align:center;}
+h1{font-size:clamp(1.8rem,4.5vw,2.6rem);font-weight:900;margin-bottom:12px;}
+h1 em{font-style:normal;color:var(--gd);}
+.sub{font-size:17px;color:var(--muted);max-width:500px;margin:0 auto;}
+.wrap{max-width:700px;margin:0 auto;padding:56px 20px;}
+h2{font-size:1.1rem;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:var(--gd);margin:36px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--gl);}
+.faq-item{background:#fff;border-radius:var(--r);padding:22px 24px;margin-bottom:10px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.04);transition:.2s;}
+.faq-item:hover{box-shadow:var(--shadow);}
+.faq-q{font-weight:700;font-size:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+.faq-q .arrow{flex-shrink:0;font-size:20px;color:var(--g);transition:.2s;margin-top:2px;}
+.faq-item.open .arrow{transform:rotate(45deg);}
+.faq-a{font-size:15px;color:var(--muted);margin-top:12px;display:none;line-height:1.7;}
+.faq-item.open .faq-a{display:block;}
+.faq-a strong{color:var(--text);}
+.faq-a a{color:var(--gd);font-weight:700;}
+.cta-wrap{background:linear-gradient(135deg,var(--gd),#3d9449);padding:64px 20px;text-align:center;}
+.cta-wrap h2{color:#fff;font-size:clamp(1.4rem,4vw,2.1rem);font-weight:900;margin-bottom:12px;text-transform:none;border:none;letter-spacing:0;padding:0;}
+.cta-wrap p{color:rgba(255,255,255,.75);font-size:17px;margin-bottom:28px;}
+.btn-white{background:#fff;color:var(--gd);padding:16px 38px;border-radius:50px;font-weight:900;font-size:17px;display:inline-block;transition:.2s;box-shadow:0 4px 16px rgba(0,0,0,.12);margin:6px;}.btn-white:hover{transform:translateY(-2px);}
+.btn-coral{background:var(--c);color:#fff;padding:16px 38px;border-radius:50px;font-weight:900;font-size:17px;display:inline-block;transition:.2s;margin:6px;}.btn-coral:hover{background:#e06a50;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">Fresh<span>Vibe</span></div>
+  <a href="index.html" class="nav-back">← На главную</a>
+</nav>
+
+<div class="hero">
+  <h1>Частые <em>вопросы</em></h1>
+  <p class="sub">Собрали самые популярные вопросы перед записью. Не нашла ответ — <a href="https://t.me/m/RDzFFDB-MGNi" style="color:var(--gd);font-weight:700;">напиши Ирине лично</a>.</p>
+</div>
+
+<div class="wrap">
+
+  <h2>О программе</h2>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Чем FreshVibe отличается от обычной диеты?</span><span class="arrow">+</span></div>
+    <div class="faq-a">Обычная диета говорит что можно, а что нельзя — и держится на запрете и силе воли. FreshVibe помогает выработать <strong>новые привычки осознанного питания</strong>: ты начинаешь есть то что нужно телу, потому что хочешь, а не потому что «нельзя иначе». Срывов меньше, потому что нет жёстких запретов. А результат — снижение веса от 1 до 1,5 кг в неделю, без голода и без чувства вины.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Сколько времени нужно уделять каждый день?</span><span class="arrow">+</span></div>
+    <div class="faq-a">10–15 минут в день. Одно задание, одно аудио или одна запись в дневник. Это встраивается в уже существующий день — не требует нового ритуала с утра или специального «окна» времени.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Я уже пробовала много всего и ничего не помогло. Почему это поможет?</span><span class="arrow">+</span></div>
+    <div class="faq-a">Потому что ты, скорее всего, пробовала работать <strong>с едой</strong> — ограничивать, считать, запрещать. FreshVibe работает с другим уровнем: с триггерами и автоматическими реакциями. Это не ещё одна попытка «есть меньше» — это другой механизм.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Что такое триггеры и как их найти?</span><span class="arrow">+</span></div>
+    <div class="faq-a">Триггер — это конкретная ситуация или эмоция, которая автоматически запускает желание поесть, даже если ты не голодна. Например: усталость после рабочего звонка, скука в воскресенье вечером, тревога перед важным событием. На первой неделе программы мы находим <strong>твои</strong> конкретные триггеры — не общие, а именно твои.</div>
+  </div>
+
+  <h2>Об участии</h2>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Как всё устроено технически? Где проходит программа?</span><span class="arrow">+</span></div>
+    <div class="faq-a">Программа проходит в <strong>Telegram, WhatsApp, MAX или удобном тебе мессенджере</strong> — скажи Ирине какой предпочитаешь. После оплаты куратор напишет тебе лично. Каждый день — новое задание или материал. Куратор пишет первым — сам, без напоминаний с твоей стороны.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Работает ли программа если я не в России?</span><span class="arrow">+</span></div>
+    <div class="faq-a">Да. Ирина работает онлайн — <strong>с любой точки мира</strong>. Общение через Telegram, WhatsApp, MAX или другой мессенджер — удобно с любым часовым поясом. Оплата тоже доступна международная.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Кто такой куратор? Это Ирина?</span><span class="arrow">+</span></div>
+    <div class="faq-a">Куратор — специально подготовленный помощник который ведёт тебя по программе ежедневно. Ирина разработала программу и создала все материалы. В базовых тарифах куратор ведёт каждый день; в расширенном тарифе Ирина лично делает видео-разборы раз в неделю.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>А если я пропущу день или несколько?</span><span class="arrow">+</span></div>
+    <div class="faq-a">Куратор сам напишет тебе если ты пропала — без осуждения, просто «как ты?». Пропуски — нормальная часть жизни, мы это учитываем. У тебя есть инструмент «Возврат» специально для таких ситуаций.</div>
+  </div>
+
+  <h2>О результатах</h2>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Я похудею? На сколько килограммов?</span><span class="arrow">+</span></div>
+    <div class="faq-a">FreshVibe — не о похудении как цели, а о другом отношении с едой. Когда ты перестаёшь заедать стресс и ешь по голоду, а не по тревоге — вес часто нормализуется естественно. Но мы не обещаем конкретных цифр: результат зависит от твоей ситуации. Что обещаем точно — ты поймёшь свои триггеры и получишь инструменты для работы с ними.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>А если я снова сорвусь в программе?</span><span class="arrow">+</span></div>
+    <div class="faq-a">Срывы — часть процесса, не провал. У тебя будет инструмент <strong>«Возврат»</strong> — конкретный план из трёх шагов на такой случай. Куратор тоже рядом: знает что делать и напишет сам. Программа не про «больше никогда не срываться» — она про то как возвращаться быстро и без чувства вины.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Когда я почувствую результат?</span><span class="arrow">+</span></div>
+    <div class="faq-a">Большинство участниц замечают первое изменение уже на <strong>первой неделе</strong>: меньше мыслей о еде в течение дня, вечерние срывы становятся реже или слабее. Устойчивый результат — к концу 21-го дня.</div>
+  </div>
+
+  <h2>Об оплате и гарантии</h2>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Как оплатить? Доступны ли международные карты?</span><span class="arrow">+</span></div>
+    <div class="faq-a">Оплата онлайн. Доступны российские карты (Visa, Mastercard, Мир), и международные способы оплаты. Подробнее — на странице оплаты после выбора тарифа.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Что значит гарантия 7 дней? Как вернуть деньги?</span><span class="arrow">+</span></div>
+    <div class="faq-a">В течение первых 7 дней ты можешь вернуть продукты и получить обратно их стоимость. Для этого нужно отправить продукты обратно — доставку оплачиваешь самостоятельно. Напиши Ирине — она объяснит как оформить возврат.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Какой тариф выбрать если не знаю с чего начать?</span><span class="arrow">+</span></div>
+    <div class="faq-a"><strong>Базовый (21 день)</strong> — оптимальный выбор для большинства: есть питание, поддержка и психология. <strong>Пробный (10 дней)</strong> — если хочешь познакомиться с системой с минимальными вложениями. <strong>Расширенный (30 дней)</strong> — если важно максимальное закрепление и персональная работа. <strong>Индивидуальный (45 дней)</strong> — если хочешь работать лично с Ириной, созваниваться каждую неделю и получить программу полностью под себя.<br><br>Или <a href="https://t.me/m/RDzFFDB-MGNi">напиши Ирине</a> — она поможет выбрать под твою ситуацию.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggle(this)">
+    <div class="faq-q"><span>Обязательно ли использовать функциональные продукты питания в программе?</span><span class="arrow">+</span></div>
+    <div class="faq-a">Функциональные продукты питания входят в программу. Их использование ведёт к более комфортному и быстрому достижению результата — но выбор за вами. Возврат продуктов возможен в течение 7 дней (доставка при возврате оплачивается самостоятельно).</div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-wrap">
+  <h2>Готова попробовать?</h2>
+  <p>Гарантия возврата 7 дней — никакого риска.</p>
+  <a href="tariffs.html" class="btn-white">Выбрать тариф →</a>
+  <a href="index.html" class="btn-coral">На главную →</a>
+</div>
+
+<script>
+function toggle(el){el.classList.toggle('open');}
+</script>
+<footer style="background:#1e1e1e;color:#999;text-align:center;padding:32px 20px;font-size:13px;"><style>footer a{color:#7EC88A;}</style>
+<div style="max-width:760px;margin:0 auto;">
+    <div style="margin-bottom:14px;">FreshVibe · <a href="index.html">Главная</a> · <a href="tariffs.html">Программы</a> · <a href="faq.html">Вопросы</a> · <a href="oferta.html">Публичная оферта</a> · <a href="privacy.html">Политика конфиденциальности</a></div>
+    <div style="font-size:12px;line-height:1.7;color:#8a8a8a;">
+      ИП Андреева Ирина Васильевна · ИНН 672202214225 · ОГРНИП 312502727900026<br>
+      Принимаем к оплате карты VISA, MasterCard, МИР. Платежи обрабатываются через безопасный шлюз банка (PCI DSS, шифрование SSL).<br>
+      Услуги оказываются онлайн на территории РФ и за её пределами. Возврат — на карту платежа, от 1 до 30 рабочих дней. <a href="oferta.html">Условия возврата</a>.<br>
+      Информация на сайте носит информационный характер, не является медицинской услугой и публичной офертой в части, не охваченной <a href="oferta.html">Офертой</a>.
+    </div>
+  </div>
+</footer>
+</body>
+</html>
