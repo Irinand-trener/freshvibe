@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест: что мешает именно тебе — FreshVibe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--g:#7EC88A;--gd:#4fa85c;--gl:#e8f7eb;--c:#F4856A;--cl:#fff0ec;--beige:#faf8f5;--text:#1e1e1e;--muted:#777;--border:#e4ded8;--shadow:0 4px 24px rgba(0,0,0,.08);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;color:var(--text);background:linear-gradient(160deg,#f0faf2 0%,#fefaf7 60%,#fff0ec 100%);font-size:17px;line-height:1.6;min-height:100vh;padding:20px 16px 50px;}
+.wrap{max-width:540px;margin:0 auto;}
+.logo{text-align:center;font-weight:900;font-size:22px;color:var(--gd);margin-bottom:20px;}
+.logo span{color:var(--c);}
+.progress{height:6px;background:#e4ded8;border-radius:10px;margin-bottom:24px;overflow:hidden;}
+.progress i{display:block;height:100%;background:var(--g);border-radius:10px;transition:width .35s;}
+.card{background:#fff;border-radius:20px;padding:28px 24px;box-shadow:var(--shadow);}
+.qnum{font-size:13px;font-weight:800;color:var(--gd);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+h1{font-size:clamp(1.45rem,4.5vw,1.95rem);font-weight:900;line-height:1.25;margin-bottom:10px;}
+h1 em{font-style:normal;color:var(--gd);}
+h2{font-size:19px;font-weight:900;line-height:1.35;margin-bottom:8px;}
+.sub{color:var(--muted);font-size:15px;margin-bottom:20px;}
+.hint{font-size:13px;color:var(--muted);margin-bottom:14px;}
+.opt{display:block;width:100%;text-align:left;background:var(--beige);border:2px solid transparent;border-radius:14px;padding:15px 18px;margin-bottom:10px;font-family:inherit;font-size:16px;font-weight:700;color:var(--text);cursor:pointer;transition:.15s;}
+.opt:hover{border-color:var(--g);background:var(--gl);}
+.opt.sel{border-color:var(--gd);background:var(--gl);}
+.opt.sel::after{content:' ✓';color:var(--gd);font-weight:900;}
+.opt em{font-style:normal;display:block;font-weight:400;font-size:13px;color:var(--muted);margin-top:2px;}
+.btn{display:block;width:100%;text-align:center;background:var(--c);color:#fff;padding:17px 20px;border-radius:50px;font-weight:800;font-size:17px;text-decoration:none;border:none;cursor:pointer;font-family:inherit;box-shadow:0 6px 20px rgba(244,133,106,.35);transition:.2s;margin-top:6px;}
+.btn:hover{background:#e06a50;}
+.start-note{text-align:center;font-size:13px;color:var(--muted);margin-top:12px;}
+.hidden{display:none;}
+.res-badge{display:inline-block;background:var(--cl);color:#d65a3f;font-weight:800;font-size:13px;padding:6px 16px;border-radius:50px;margin-bottom:12px;}
+.res-title{font-size:23px;font-weight:900;line-height:1.25;margin-bottom:14px;}
+.res-body{font-size:16px;color:#444;margin-bottom:14px;}
+.res-body b{color:var(--text);}
+.res-fix{background:var(--gl);border-radius:14px;padding:16px 18px;font-size:15px;color:#2c5233;margin-bottom:14px;}
+.res-fix b{display:block;margin-bottom:4px;color:var(--gd);}
+.res-extra{background:var(--beige);border-radius:14px;padding:14px 16px;font-size:14px;color:#555;margin-bottom:16px;line-height:1.65;}
+.res-extra b{color:var(--text);}
+.offer{background:var(--text);color:#fff;border-radius:18px;padding:24px 22px;margin-top:16px;text-align:center;}
+.offer h3{font-size:19px;font-weight:900;margin-bottom:8px;}
+.offer p{font-size:14px;color:#bbb;margin-bottom:16px;}
+.offer .meta{font-size:14px;color:#7EC88A;font-weight:800;margin-bottom:14px;}
+.again{display:block;text-align:center;margin-top:16px;font-size:14px;color:var(--muted);text-decoration:underline;cursor:pointer;}
+.disc{font-size:12px;color:var(--muted);text-align:center;margin-top:18px;line-height:1.5;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">Fresh<span>Vibe</span></div>
+  <div class="progress"><i id="bar" style="width:0%"></i></div>
+
+  <div class="card" id="start">
+    <h1>Что беспокоит <em>именно тебя</em>?</h1>
+    <p class="sub">Отметь всё, что откликается — дальше вопросы будут по твоей теме. Минута времени, в конце получишь конкретный ответ.</p>
+    <div class="hint">Можно выбрать несколько</div>
+    <div id="topics"></div>
+    <button class="btn hidden" id="topicBtn" onclick="startQuiz()">Дальше →</button>
+    <div class="start-note">Без регистрации и почты — результат видишь только ты</div>
+  </div>
+
+  <div class="card hidden" id="quiz">
+    <div class="qnum" id="qnum"></div>
+    <h2 id="qtext"></h2>
+    <div class="hint">Можно выбрать несколько вариантов</div>
+    <div id="opts"></div>
+    <button class="btn hidden" id="nextBtn" onclick="submitAnswer()">Дальше →</button>
+  </div>
+
+  <div class="card hidden" id="result">
+    <div class="res-badge">ТВОЙ РЕЗУЛЬТАТ</div>
+    <div class="res-title" id="rTitle"></div>
+    <div class="res-body" id="rBody"></div>
+    <div class="res-fix" id="rFix"></div>
+    <div class="res-extra" id="rExtra"></div>
+    <div class="offer">
+      <h3 id="offerTitle">Хочешь убрать это за 3 дня?</h3>
+      <p>Тест показал общее направление. Но что именно менять в твоей еде — видно только по трём дням твоего обычного питания. Я смотрю их лично и собираю тебе меню под твою жизнь.</p>
+      <div class="meta">3 дня · лично со мной</div>
+      <a href="stop-sryv.html" class="btn" id="offerBtn">Узнать подробнее →</a>
+    </div>
+    <span class="again" onclick="location.reload()">Пройти тест заново</span>
+    <div class="disc">Тест носит информационный характер и не является медицинской консультацией. При стойких симптомах обратитесь к врачу.</div>
+  </div>
+</div>
+
+<script>
+const TOPICS = [
+  {id:'weight', t:'Вес стоит или растёт', e:'вроде ем немного, а результата нет'},
+  {id:'sweet',  t:'Тяга к сладкому и вредному', e:'вечером несёт к холодильнику'},
+  {id:'swell',  t:'Отёчность и тяжесть', e:'лицо утром, ноги к вечеру, кольца не снимаются'},
+  {id:'stress', t:'Стресс и «заедание»', e:'нервничаю — сразу тянет поесть'},
+  {id:'energy', t:'Нет энергии', e:'встаю уставшей, к обеду «выключаюсь»'},
+];
+
+const COMMON = [
+  {q:'Что у тебя обычно на завтрак?', a:[
+    {t:'Только кофе или чай', s:{morning:3}},
+    {t:'Бутерброд, булочка, каша на воде', s:{morning:2}},
+    {t:'Яйца, творог, что-то белковое', s:{morning:0}},
+    {t:'Не завтракаю вообще', s:{morning:3}},
+  ]},
+  {q:'Сколько времени проходит между приёмами пищи?', a:[
+    {t:'Бывает по 5–6 часов', s:{gap:3}},
+    {t:'Часа 4', s:{gap:2}},
+    {t:'2–3 часа, перекусываю', s:{gap:0}},
+    {t:'Ем хаотично, когда получится', s:{gap:3}},
+  ]},
+  {q:'Сколько чистой воды пьёшь за день?', a:[
+    {t:'Почти не пью, в основном чай и кофе', s:{water:3}},
+    {t:'Пару стаканов', s:{water:2}},
+    {t:'Литра полтора-два', s:{water:0}},
+    {t:'Никогда не считала', s:{water:2}},
+  ]},
+];
+
+const BY_TOPIC = {
+  weight: [
+    {q:'Есть ли белок в каждом приёме пищи?', a:[
+      {t:'Честно — редко', s:{protein:3}},
+      {t:'Только в обед или ужин', s:{protein:2}},
+      {t:'Стараюсь, чтобы был везде', s:{protein:0}},
+      {t:'Не знаю, что считать белком', s:{protein:2}},
+    ]},
+    {q:'Что чаще всего на ужин?', a:[
+      {t:'Макароны, картошка, каша', s:{protein:2}},
+      {t:'Что осталось / что успела', s:{protein:2, gap:1}},
+      {t:'Мясо или рыба с овощами', s:{protein:0}},
+      {t:'Стараюсь не ужинать вообще', s:{gap:3, evening:2}},
+    ]},
+  ],
+  sweet: [
+    {q:'Когда тянет на сладкое?', a:[
+      {t:'После 20:00, когда дела сделаны', s:{evening:3}},
+      {t:'Днём, часа в четыре', s:{gap:3}},
+      {t:'После каждого приёма пищи', s:{morning:2}},
+      {t:'Когда нервничаю', s:{stress:3}},
+    ]},
+    {q:'Что происходит после «одного кусочка»?', a:[
+      {t:'Съедаю всё, что есть', s:{evening:2, morning:1}},
+      {t:'Останавливаюсь, но с трудом', s:{morning:1}},
+      {t:'Могу остановиться спокойно', s:{}},
+      {t:'Потом вина и «с понедельника»', s:{evening:2}},
+    ]},
+  ],
+  swell: [
+    {q:'Когда отёчность заметнее?', a:[
+      {t:'Утром — лицо, веки', s:{water:2, salt:2}},
+      {t:'К вечеру — ноги, кольца', s:{salt:2, water:1}},
+      {t:'Практически всегда', s:{salt:2, water:2}},
+      {t:'После солёного или сладкого', s:{salt:3}},
+    ]},
+    {q:'Сколько солёного в твоём дне?', a:[
+      {t:'Люблю солёное: колбаса, сыр, соусы', s:{salt:3}},
+      {t:'Часто готовые продукты и полуфабрикаты', s:{salt:3}},
+      {t:'Готовлю сама, соли немного', s:{salt:0}},
+      {t:'Не обращала внимания', s:{salt:2}},
+    ]},
+  ],
+  stress: [
+    {q:'Что делаешь, когда стресс?', a:[
+      {t:'Иду к холодильнику', s:{stress:3}},
+      {t:'Пью кофе и забываю поесть', s:{stress:2, gap:2}},
+      {t:'Ем сладкое, чтобы переключиться', s:{stress:3}},
+      {t:'Ем как обычно', s:{}},
+    ]},
+    {q:'Как у тебя со сном?', a:[
+      {t:'Сплю мало, встаю разбитой', s:{stress:3}},
+      {t:'Долго не могу уснуть', s:{stress:2}},
+      {t:'Просыпаюсь ночью, иногда иду поесть', s:{stress:2, evening:2}},
+      {t:'Сплю нормально', s:{}},
+    ]},
+  ],
+  energy: [
+    {q:'Когда сильнее всего падает энергия?', a:[
+      {t:'С самого утра, не могу проснуться', s:{morning:3}},
+      {t:'Часа в 3–4 дня', s:{gap:3, morning:1}},
+      {t:'К вечеру, ничего не хочется', s:{gap:2}},
+      {t:'Весь день держусь на кофе', s:{morning:3, water:1}},
+    ]},
+    {q:'Сколько кофе в день?', a:[
+      {t:'Три чашки и больше', s:{morning:2, water:2}},
+      {t:'Одна-две', s:{water:1}},
+      {t:'Не пью кофе', s:{}},
+      {t:'Кофе вместо завтрака', s:{morning:3}},
+    ]},
+  ],
+};
+
+const RES = {
+  morning: {
+    title:'Всё дело в пустом завтраке',
+    body:'Ты начинаешь день без белка — и сахар в крови скачет с самого утра. К вечеру организм так проголодался, что <b>требует самое быстрое: сладкое и мучное</b>. Отсюда и вечерние срывы, и упадок сил днём.',
+    fix:'<b>Что менять первым</b>Завтрак с белком в первые 30–40 минут после подъёма. Не «полезная овсянка» на воде — именно белок: яйца, творог, гречка с яйцом, белковый коктейль. Разницу большинство чувствует уже в первый вечер.'
+  },
+  gap: {
+    title:'Ты слишком долго ходишь голодной',
+    body:'Между едой проходит слишком много времени. Организм пугается и <b>начинает запасать</b>: к вечеру он возьмёт своё, да ещё и с добавкой. И усталость в четыре часа дня — из той же серии.',
+    fix:'<b>Что менять первым</b>Перерывы между едой — не больше 3 часов. Держи два перекуса наготове: один дома, один в сумке. Яйцо, сыр, творог, кефир, белковый коктейль. Это не «перебить аппетит», это не дать организму дойти до аварийного режима.'
+  },
+  protein: {
+    title:'Тебе не хватает белка',
+    body:'Белок — единственное, что даёт долгую сытость. Когда его мало, <b>ты вроде ешь немного, но всё время голодная</b> — и вес стоит: телу не из чего строиться, зато хватает быстрых углеводов.',
+    fix:'<b>Что менять первым</b>Белок в каждый приём пищи: утром, днём и вечером. Ужин — лёгкий белок с овощами: рыба, курица, индейка, творог. Не «макароны, что остались». Начни с завтрака — это самая быстрая перемена.'
+  },
+  stress: {
+    title:'Виноват гормон стресса, а не ты',
+    body:'Стресс поднимает кортизол — гормон, которому нужно срочно накормить тебя чем-то быстрым. Поэтому в нервный день тянет не на брокколи, а на шоколад. <b>Это физиология, а не слабость</b> — с гормонами сила воли не спорит ни у кого.',
+    fix:'<b>Что менять первым</b>Стресс никуда не денется, но еда решает, насколько сильно он тебя накроет. Ровный сахар в крови — белок утром и перерывы не больше 3 часов — снижает гормональные качели. Тело перестаёт требовать сладкое как аварийное топливо.'
+  },
+  water: {
+    title:'Тебе не хватает воды',
+    body:'Когда воды мало, организм <b>начинает её запасать</b> — отсюда отёки и тяжесть. А ещё мозг путает жажду с голодом: половина «хочу перекусить» — это на самом деле «хочу пить».',
+    fix:'<b>Что менять первым</b>1–2 стакана чистой воды сразу после пробуждения и норма в течение дня. Чай и кофе не считаются. И правило: потянуло на сладкое — сначала стакан воды и 10 минут паузы. В 7 случаях из 10 это была жажда.'
+  },
+  salt: {
+    title:'Много соли и мало воды',
+    body:'Избыток соли — колбасы, сыры, соусы, полуфабрикаты — заставляет тело <b>задерживать жидкость</b>. Вместе с нехваткой чистой воды это даёт то самое: лицо утром, ноги и кольца к вечеру, ощущение налитости.',
+    fix:'<b>Что менять первым</b>Меньше готовых продуктов и соусов, больше своей еды, где соль контролируешь ты. И одновременно больше чистой воды — парадокс в том, что чем меньше пьёшь, тем сильнее тело запасает.'
+  },
+  evening: {
+    title:'Вечером тело добирает то, что недополучило днём',
+    body:'Тяга в 20:00–23:00 — не «привычка есть перед телевизором». Это тело добирает своё: <b>не получило утром и днём — заберёт вечером</b>, когда ты устала себя контролировать.',
+    fix:'<b>Что менять первым</b>Разбирать нужно не вечер, а утро и день. Белок с утра, перерывы не больше 3 часов, лёгкий белок с овощами на ужин за 2–3 часа до сна. Вечер чинится сам, когда день собран правильно.'
+  }
+};
+
+const TOPIC_EXTRA = {
+  weight: 'Вес почти никогда не стоит «просто так». Чаще всего дело в двух вещах — мало белка и хаотичный режим. Когда день собран, вес идёт вниз без диет и подсчёта калорий.',
+  sweet:  'Тяга к сладкому уходит не через запрет, а через сытость. Когда организм получает своё днём, вечером ему просто нечего требовать.',
+  swell:  'На отёчность сильнее всего влияют питьевой режим и количество соли. Если отёки стойкие и с питанием не связаны — покажись врачу, это может быть не про еду.',
+  stress: 'Убрать стресс совсем не получится, но можно убрать то, что его усиливает: голодные провалы и качели сахара в крови.',
+  energy: 'Энергия берётся не из кофе, а из ровного сахара в крови. Белковый завтрак и отсутствие больших перерывов дают больше сил, чем третья чашка.'
+};
+
+let selectedTopics = [];
+let questions = [];
+let i = 0;
+let picked = [];
+const score = {morning:0, gap:0, protein:0, stress:0, water:0, salt:0, evening:0};
+
+const tbox = document.getElementById('topics');
+TOPICS.forEach(t=>{
+  const b = document.createElement('button');
+  b.className='opt';
+  b.innerHTML = t.t + '<em>' + t.e + '</em>';
+  b.onclick = ()=>{
+    const p = selectedTopics.indexOf(t.id);
+    if (p===-1){ selectedTopics.push(t.id); b.classList.add('sel'); }
+    else { selectedTopics.splice(p,1); b.classList.remove('sel'); }
+    document.getElementById('topicBtn').classList.toggle('hidden', selectedTopics.length===0);
+  };
+  tbox.appendChild(b);
+});
+
+function startQuiz(){
+  questions = [...COMMON];
+  selectedTopics.forEach(id => { questions = questions.concat(BY_TOPIC[id]); });
+  if (questions.length > 7) questions = questions.slice(0,7);
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  show();
+}
+function show(){
+  const q = questions[i];
+  picked = [];
+  document.getElementById('qnum').textContent = 'Вопрос ' + (i+1) + ' из ' + questions.length;
+  document.getElementById('qtext').textContent = q.q;
+  document.getElementById('bar').style.width = (i/questions.length*100)+'%';
+  document.getElementById('nextBtn').classList.add('hidden');
+  const box = document.getElementById('opts');
+  box.innerHTML='';
+  q.a.forEach((a,idx)=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.textContent=a.t;
+    b.onclick=()=>toggle(b,idx);
+    box.appendChild(b);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggle(btn, idx){
+  const p = picked.indexOf(idx);
+  if (p===-1){ picked.push(idx); btn.classList.add('sel'); }
+  else { picked.splice(p,1); btn.classList.remove('sel'); }
+  document.getElementById('nextBtn').classList.toggle('hidden', picked.length===0);
+}
+function submitAnswer(){
+  picked.forEach(idx=>{
+    const a = questions[i].a[idx];
+    for (const k in a.s) score[k] = (score[k]||0) + a.s[k];
+  });
+  i++;
+  if (i < questions.length) show(); else finish();
+}
+function finish(){
+  document.getElementById('bar').style.width='100%';
+  document.getElementById('quiz').classList.add('hidden');
+  const top = Object.keys(score).reduce(function(a,b){ return score[a]>=score[b]?a:b; });
+  const r = RES[top] || RES.morning;
+  document.getElementById('rTitle').textContent = r.title;
+  document.getElementById('rBody').innerHTML = r.body;
+  document.getElementById('rFix').innerHTML = r.fix;
+  // выбор лендинга: тема про сладкое/вечерние срывы -> стоп-срыв, остальное -> универсальный разбор
+  var sweetish = selectedTopics.indexOf('sweet') !== -1 || top === 'evening';
+  var btn = document.getElementById('offerBtn');
+  var ttl = document.getElementById('offerTitle');
+  if (sweetish && selectedTopics.length === 1) {
+    btn.setAttribute('href','stop-sryv.html');
+    btn.textContent = 'Узнать про «Стоп-срыв» →';
+    ttl.textContent = 'Хочешь убрать вечернюю тягу за 3 дня?';
+  } else {
+    btn.setAttribute('href','razbor.html');
+    btn.textContent = 'Хочу лёгкость и энергию →';
+    ttl.textContent = 'Хочешь убрать это за 3 дня?';
+  }
+  const extras = selectedTopics.map(function(id){ return TOPIC_EXTRA[id]; }).filter(Boolean);
+  const ex = document.getElementById('rExtra');
+  if (extras.length){ ex.innerHTML = '<b>По твоей теме:</b><br>' + extras.join('<br><br>'); }
+  else { ex.style.display='none'; }
+  document.getElementById('result').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
