@@ -44,6 +44,15 @@ h2{font-size:19px;font-weight:900;line-height:1.35;margin-bottom:8px;}
 .offer p{font-size:14px;color:#bbb;margin-bottom:16px;}
 .offer .meta{font-size:14px;color:#7EC88A;font-weight:800;margin-bottom:14px;}
 .again{display:block;text-align:center;margin-top:16px;font-size:14px;color:var(--muted);text-decoration:underline;cursor:pointer;}
+.next-box{background:var(--gl);border-radius:16px;padding:20px 22px;margin-top:16px;text-align:center;}
+.next-title{font-weight:900;font-size:17px;color:var(--gd);margin-bottom:6px;}
+.next-sub{font-size:14px;color:#444;margin-bottom:14px;}
+.next-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;}
+.mbtn{display:inline-block;padding:12px 24px;border-radius:50px;font-weight:800;font-size:15px;color:#fff;}
+.mbtn.tg{background:#29a9eb;}
+.mbtn.wa{background:#25d366;}
+.mbtn.mx{background:#7c5cff;}
+.chan{display:block;font-size:14px;font-weight:700;color:var(--gd);text-decoration:underline;}
 .disc{font-size:12px;color:var(--muted);text-align:center;margin-top:18px;line-height:1.5;}
 </style>
 </head>
@@ -80,6 +89,16 @@ h2{font-size:19px;font-weight:900;line-height:1.35;margin-bottom:8px;}
       <p>Тест показал общее направление. Но что именно менять в твоей еде — видно только по трём дням твоего обычного питания. Я смотрю их лично и собираю тебе меню под твою жизнь.</p>
       <div class="meta">3 дня · лично со мной</div>
       <a href="stop-sryv.html" class="btn" id="offerBtn">Узнать подробнее →</a>
+    </div>
+    <div class="next-box">
+      <div class="next-title">Где меня найти</div>
+      <p class="next-sub">Остались вопросы по результату — напиши, я на связи.</p>
+      <div class="next-btns">
+        <a href="https://t.me/m/-LDBo9MmMjIy" class="mbtn tg">✈️ Telegram</a>
+        <a href="https://wa.me/79032619290" class="mbtn wa">💬 WhatsApp</a>
+        <a href="https://max.ru/u/f9LHodD0cOLBW2m4dKLQepK-hWKtQVQdtK11xTnkUJbF_u66VE9pJAhmEwA" class="mbtn mx">🟣 MAX</a>
+      </div>
+      <a href="https://t.me/hochu_hudeu" class="chan">📣 Обязательно жду тебя в моём канале — там разборы, рецепты и памятки</a>
     </div>
     <span class="again" onclick="location.reload()">Пройти тест заново</span>
     <div class="disc">Тест носит информационный характер и не является медицинской консультацией. При стойких симптомах обратитесь к врачу.</div>
@@ -220,6 +239,11 @@ const RES = {
     body:'Избыток соли — колбасы, сыры, соусы, полуфабрикаты — заставляет тело <b>задерживать жидкость</b>. Вместе с нехваткой чистой воды это даёт то самое: лицо утром, ноги и кольца к вечеру, ощущение налитости.',
     fix:'<b>Что менять первым</b>Меньше готовых продуктов и соусов, больше своей еды, где соль контролируешь ты. И одновременно больше чистой воды — парадокс в том, что чем меньше пьёшь, тем сильнее тело запасает.'
   },
+  clean: {
+    title:'В твоём питании нет явных провалов',
+    body:'Ты ешь регулярно, с белком и пьёшь достаточно — по основным вопросам всё ровно. <b>Значит, причина тоньше</b>: дело может быть в количестве белка именно для тебя, в сочетании продуктов, в скрытой соли или сахаре там, где ты их не ждёшь, в режиме сна или в чём-то ещё за пределами еды.',
+    fix:'<b>Что делать дальше</b>Такие случаи по тесту не разобрать — тут нужен живой взгляд на конкретные три дня твоего питания. Именно этим мы и занимаемся в коротком формате: ты пишешь, что ешь, я смотрю и говорю честно — это про еду или стоит показаться врачу.'
+  },
   evening: {
     title:'Вечером тело добирает то, что недополучило днём',
     body:'Тяга в 20:00–23:00 — не «привычка есть перед телевизором». Это тело добирает своё: <b>не получило утром и днём — заберёт вечером</b>, когда ты устала себя контролировать.',
@@ -294,11 +318,35 @@ function submitAnswer(){
   i++;
   if (i < questions.length) show(); else finish();
 }
+// какие результаты уместны для каждой темы (чтобы не выдать «ты голодна» тому, кто ест по часам)
+var TOPIC_PRIORITY = {
+  weight:['protein','gap','morning'],
+  sweet: ['morning','evening','gap','stress'],
+  swell: ['salt','water'],
+  stress:['stress','gap','morning'],
+  energy:['morning','gap','water']
+};
+
 function finish(){
   document.getElementById('bar').style.width='100%';
   document.getElementById('quiz').classList.add('hidden');
-  const top = Object.keys(score).reduce(function(a,b){ return score[a]>=score[b]?a:b; });
-  const r = RES[top] || RES.morning;
+
+  // бонус результатам, которые логичны для выбранной темы
+  selectedTopics.forEach(function(t){
+    (TOPIC_PRIORITY[t]||[]).forEach(function(k, idx){
+      if (score[k] > 0) score[k] += (idx === 0 ? 2 : 1);
+    });
+  });
+
+  var top = Object.keys(score).reduce(function(a,b){ return score[a]>=score[b]?a:b; });
+  var maxScore = score[top];
+  var r;
+  if (maxScore < 3) {
+    // у человека нет явных провалов в питании — не приписываем ему чужую проблему
+    r = RES.clean;
+  } else {
+    r = RES[top] || RES.morning;
+  }
   document.getElementById('rTitle').textContent = r.title;
   document.getElementById('rBody').innerHTML = r.body;
   document.getElementById('rFix').innerHTML = r.fix;
